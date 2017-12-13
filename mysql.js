@@ -11,7 +11,14 @@ function formatSql(sql) {
  *      transaction: true, // 是否支持事物
  *      isPool: true, //是否支持连接池
  *      router: true, //是否支持router,
- *      comments: '备注'
+ *      comments: '备注',
+ *	limit: 10,	// 连接池的情况下，连接数
+ *	host: '127.0.0.1', // 连接ip
+ *	user: '用户名',
+ *	password: '密码',
+ *	database: '数据库',
+ *	port: '端口',
+ *	dateStrings: '日期展示方式，默认DATE'
  * }
  *
  *
@@ -19,9 +26,10 @@ function formatSql(sql) {
 export default class Mysql {
 	constructor(options = {}) {
 		this.connect = {
+			connectionLimit: options.limit || 10,
 			comments: options.comments || options.host,
 			host: options.host,
-			user: options.username,
+			user: options.user,
 			password: options.password,
 			database: options.database,
 			port: options.port || 3306,
